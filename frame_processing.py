@@ -261,20 +261,20 @@ def show_visualizations():
     fixation_map_image = fixation_map.fixation_map_im(x_list, y_list, weighs, calculated_values)
     fixation_scan_image = fixation_scan.fixation_scan_im(x_list, y_list, weighs, calculated_values)
     root_dir = os.path.dirname(
-        os.path.abspath(__file__)) + '//static//images//' + calculated_values.last_file_name + '_heatmap.png'
-    root_dir = root_dir.replace('//', '\\', 345345)
+        os.path.abspath(__file__)) + '/static/images/' + calculated_values.last_file_name + '_heatmap.png'
+    # root_dir = root_dir.replace('//', '\\', 345345)
     cv2.imwrite(root_dir, heatmap_image)
     root_dir = os.path.dirname(
-        os.path.abspath(__file__)) + '//static//images//' + calculated_values.last_file_name + '_scanpath.png'
-    root_dir = root_dir.replace('//', '\\', 345345)
+        os.path.abspath(__file__)) + '/static/images/' + calculated_values.last_file_name + '_scanpath.png'
+    # root_dir = root_dir.replace('//', '\\', 345345)
     cv2.imwrite(root_dir, scanpath_image)
     root_dir = os.path.dirname(
-        os.path.abspath(__file__)) + '//static//images//' + calculated_values.last_file_name + '_fixation_map.png'
-    root_dir = root_dir.replace('//', '\\', 345345)
+        os.path.abspath(__file__)) + '/static/images/' + calculated_values.last_file_name + '_fixation_map.png'
+    # root_dir = root_dir.replace('//', '\\', 345345)
     cv2.imwrite(root_dir, fixation_map_image)
     root_dir = os.path.dirname(
-        os.path.abspath(__file__)) + '//static//images//' + calculated_values.last_file_name + '_fixation_scan.png'
-    root_dir = root_dir.replace('//', '\\', 345345)
+        os.path.abspath(__file__)) + '/static/images/' + calculated_values.last_file_name + '_fixation_scan.png'
+    # root_dir = root_dir.replace('//', '\\', 345345)
     cv2.imwrite(root_dir, fixation_scan_image)
     # cv2.namedWindow('heatmap', cv2.WINDOW_FREERATIO)
     # cv2.setWindowProperty('heatmap', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
@@ -290,83 +290,83 @@ def centeroidnp(arr):
 
 def mouse_event(event, x, y, flags, param):
     global state_values, evaluation_data
-    if event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) - 10 <= y < int(
-            calculated_values.window[3] / 2) + 10:
-        if state_values.evaluation_happening:
-            gui.alert("You cannot calibrate while evaluation is happening", "Error")
-        else:
-            state_values.calibration_completed = False
-            reset_calibrations()
-    elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 30 <= y < int(
-            calculated_values.window[3] / 2) + 50:
-        if state_values.evaluation_happening:
-            gui.alert("Evaluation is happening", "Error")
-        else:
-            state_values.calibration_completed = True
-    elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 70 <= y < int(
-            calculated_values.window[3] / 2) + 90:
-        if state_values.calibration_completed is False:
-            gui.alert("You cannot start evaluation without completing calibration", "Error")
-        elif state_values.evaluation_happening is True:
-            pass
-        else:
-            state_values.evaluation_happening = True
-    elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 110 <= y < int(
-            calculated_values.window[3] / 2) + 130:
-        if state_values.calibration_completed is False:
-            gui.alert("You cannot start recording without completing calibration", "Error")
-        else:
-            state_values.recording_happening = not state_values.recording_happening
-            if state_values.recording_happening:
-                start_recording_to_file()
-            else:
-                stop_recording_to_file()
-
-    if state_values.calibration_completed is False:
-        if event is cv2.EVENT_LBUTTONDOWN and int(2 * calculated_values.window[2] / 3) <= x < int(
-                2 * calculated_values.window[2] / 3 + (
-                        (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) and int(
-            2 * calculated_values.window[3] / 3) <= y < int(
-            2 * calculated_values.window[3] / 3 + (
-                    (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)):
-            calibrate_pose_estimation_and_anchor_points()
-        elif event is cv2.EVENT_LBUTTONDOWN and int(
-                2 * calculated_values.window[2] / 3 + (
-                        (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) <= x < \
-                calculated_values.window[2] and int(
-            2 * calculated_values.window[3] / 3) <= y < int(
-            2 * calculated_values.window[3] / 3 + (
-                    (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)):
-            calibrate_eyes_depth()
-            calculate_face_distance_offset()
-        elif event is cv2.EVENT_MBUTTONDOWN:
-            calibrate_offsets()
-        elif event is cv2.EVENT_LBUTTONDOWN and int(2 * calculated_values.window[2] / 3) <= x < int(
-                2 * calculated_values.window[2] / 3 + (
-                        (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) and int(
-            2 * calculated_values.window[3] / 3 + (
-                    (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)) <= y < \
-                calculated_values.window[3]:
-            calculate_eye_correction_height_factor()
-            # calculate_eyes_distance_offset()
-        elif event is cv2.EVENT_LBUTTONDOWN and int(
-                2 * calculated_values.window[2] / 3 + (
-                        (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) <= x < \
-                calculated_values.window[2] and int(
-            2 * calculated_values.window[3] / 3 + (
-                    (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)) <= y < \
-                calculated_values.window[3]:
-            calculate_eye_correction_width_factor()
-    else:
-        pass
-
-    if state_values.evaluation_happening:
-        if event is cv2.EVENT_LBUTTONDOWN and int(calculated_values.window[2] / 2) - 150 <= x < int(
-                calculated_values.window[2] / 2) + 150 \
-                and int(calculated_values.window[3]) - 200 <= y < int(calculated_values.window[3]) - 100:
-            state_values.evaluation_measuring_points = True
-        elif event is cv2.EVENT_LBUTTONUP:
-            state_values.evaluation_measuring_points = False
+    # if event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) - 10 <= y < int(
+    #         calculated_values.window[3] / 2) + 10:
+    #     if state_values.evaluation_happening:
+    #         gui.alert("You cannot calibrate while evaluation is happening", "Error")
+    #     else:
+    #         state_values.calibration_completed = False
+    #         reset_calibrations()
+    # elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 30 <= y < int(
+    #         calculated_values.window[3] / 2) + 50:
+    #     if state_values.evaluation_happening:
+    #         gui.alert("Evaluation is happening", "Error")
+    #     else:
+    #         state_values.calibration_completed = True
+    # elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 70 <= y < int(
+    #         calculated_values.window[3] / 2) + 90:
+    #     if state_values.calibration_completed is False:
+    #         gui.alert("You cannot start evaluation without completing calibration", "Error")
+    #     elif state_values.evaluation_happening is True:
+    #         pass
+    #     else:
+    #         state_values.evaluation_happening = True
+    # elif event is cv2.EVENT_LBUTTONDOWN and 20 <= x < 40 and int(calculated_values.window[3] / 2) + 110 <= y < int(
+    #         calculated_values.window[3] / 2) + 130:
+    #     if state_values.calibration_completed is False:
+    #         gui.alert("You cannot start recording without completing calibration", "Error")
+    #     else:
+    #         state_values.recording_happening = not state_values.recording_happening
+    #         if state_values.recording_happening:
+    #             start_recording_to_file()
+    #         else:
+    #             stop_recording_to_file()
+    #
+    # if state_values.calibration_completed is False:
+    #     if event is cv2.EVENT_LBUTTONDOWN and int(2 * calculated_values.window[2] / 3) <= x < int(
+    #             2 * calculated_values.window[2] / 3 + (
+    #                     (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) and int(
+    #         2 * calculated_values.window[3] / 3) <= y < int(
+    #         2 * calculated_values.window[3] / 3 + (
+    #                 (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)):
+    #         calibrate_pose_estimation_and_anchor_points()
+    #     elif event is cv2.EVENT_LBUTTONDOWN and int(
+    #             2 * calculated_values.window[2] / 3 + (
+    #                     (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) <= x < \
+    #             calculated_values.window[2] and int(
+    #         2 * calculated_values.window[3] / 3) <= y < int(
+    #         2 * calculated_values.window[3] / 3 + (
+    #                 (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)):
+    #         calibrate_eyes_depth()
+    #         calculate_face_distance_offset()
+    #     elif event is cv2.EVENT_MBUTTONDOWN:
+    #         calibrate_offsets()
+    #     elif event is cv2.EVENT_LBUTTONDOWN and int(2 * calculated_values.window[2] / 3) <= x < int(
+    #             2 * calculated_values.window[2] / 3 + (
+    #                     (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) and int(
+    #         2 * calculated_values.window[3] / 3 + (
+    #                 (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)) <= y < \
+    #             calculated_values.window[3]:
+    #         calculate_eye_correction_height_factor()
+    #         # calculate_eyes_distance_offset()
+    #     elif event is cv2.EVENT_LBUTTONDOWN and int(
+    #             2 * calculated_values.window[2] / 3 + (
+    #                     (calculated_values.window[2] - 2 * calculated_values.window[2] / 3) / 2)) <= x < \
+    #             calculated_values.window[2] and int(
+    #         2 * calculated_values.window[3] / 3 + (
+    #                 (calculated_values.window[3] - 2 * calculated_values.window[3] / 3) / 2)) <= y < \
+    #             calculated_values.window[3]:
+    #         calculate_eye_correction_width_factor()
+    # else:
+    #     pass
+    #
+    # if state_values.evaluation_happening:
+    #     if event is cv2.EVENT_LBUTTONDOWN and int(calculated_values.window[2] / 2) - 150 <= x < int(
+    #             calculated_values.window[2] / 2) + 150 \
+    #             and int(calculated_values.window[3]) - 200 <= y < int(calculated_values.window[3]) - 100:
+    #         state_values.evaluation_measuring_points = True
+    #     elif event is cv2.EVENT_LBUTTONUP:
+    #         state_values.evaluation_measuring_points = False
 
 
 def reset_calibrations():

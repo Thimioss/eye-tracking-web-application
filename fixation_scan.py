@@ -4,7 +4,7 @@ import math
 
 import numpy as np
 
-from flaskProject.image_edit import remove_black_background
+from image_edit import remove_black_background
 
 
 def fixation_scan_im(x_list, y_list, weighs, c_v):

@@ -223,10 +223,10 @@ def image(data_image):
     debug_image = copy.copy(frame)
     if not debug_started:
         debug_started = True
-        thread = Thread(target=threaded_function, args=(10,))
-        thread.start()
-        thread.join()
-        print("thread finished...exiting")
+        # thread = Thread(target=threaded_function, args=(10,))
+        # thread.start()
+        # thread.join()
+        # print("thread finished...exiting")
 
     imgencode = cv2.imencode('.jpeg', frame, [cv2.IMWRITE_JPEG_QUALITY, 40])[1]
 

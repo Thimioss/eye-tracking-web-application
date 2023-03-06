@@ -138,7 +138,7 @@ def start_recording_to_file():
     calculated_values.last_file_name = file_name
     root_dir = os.path.dirname(os.path.abspath(__file__))
     # save_values_to_json(file_name, root_dir)
-    f = open(root_dir + '//' + file_name + '.csv', 'a', newline='')
+    f = open(root_dir + '/' + file_name + '.csv', 'a', newline='')
     writer = csv.writer(f)
     writer.writerow(
         ['Smoothed_Point_X', 'Smoothed_Point_Y', 'Left_Gaze_Point_On_Display_Area_X',

@@ -9,7 +9,6 @@ import math
 import mediapipe as mp
 import numpy as np
 import time
-import pyautogui as gui
 import csv
 import json
 import jsonpickle

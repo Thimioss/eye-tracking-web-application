@@ -172,7 +172,7 @@ def show_visualizations():
     temp_times = []
     temp_xs = []
     temp_ys = []
-    with open(calculated_values.last_file_name + '.csv', mode='r') as csv_file:
+    with open('/app/'+calculated_values.last_file_name + '.csv', mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         line_count = 0
         for row_ in csv_reader:

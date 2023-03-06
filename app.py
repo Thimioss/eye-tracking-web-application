@@ -20,7 +20,7 @@ screen_size_in_inches = 0
 window = None
 show_camera = True
 uploaded_file_name = ""
-UPLOAD_FOLDER = 'C:\\Users\\themi\\Desktop\\Diplomatic\\Repository\\eye-tracking-thesis\\eye-tracking-web-implementation\\flaskProject\\static\\images\\'
+UPLOAD_FOLDER = 'static\\images\\'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 debug_image = []
@@ -115,8 +115,7 @@ def result():
 
 @app.route("/get_csv")
 def get_csv():
-    with open('C:\\Users\\themi\\Desktop\\Diplomatic\\Repository\\eye-tracking-thesis\\eye-tracking-web'
-              '-implementation\\flaskProject\\' + frame_processing.calculated_values.last_file_name + '.csv') as fp:
+    with open(frame_processing.calculated_values.last_file_name + '.csv') as fp:
         csv = fp.read()
     return Response(
         csv,

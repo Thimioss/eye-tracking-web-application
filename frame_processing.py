@@ -173,8 +173,7 @@ def show_visualizations():
     temp_times = []
     temp_xs = []
     temp_ys = []
-    with open('C:\\Users\\themi\\Desktop\\Diplomatic\\Repository\\eye-tracking-thesis\\eye-tracking-web'
-              '-implementation\\flaskProject\\' + calculated_values.last_file_name + '.csv', mode='r') as csv_file:
+    with open(calculated_values.last_file_name + '.csv', mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         line_count = 0
         for row_ in csv_reader:
